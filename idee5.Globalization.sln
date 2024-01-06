@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Globalization", "idee5.Globalization\idee5.Globalization.csproj", "{7FBBEAEE-6E2E-434F-8A22-4A19A6F4E795}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Globalization.Test", "idee5.Globalization.Test\idee5.Globalization.Test.csproj", "{01B74F31-19ED-4436-94BD-714A9FEED172}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Globalization.EFCore", "idee5.Globalization.EFCore\idee5.Globalization.EFCore.csproj", "{4E8CF4A8-B650-4317-81D2-FA61ED93CD58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{30A1A31F-1FFA-4C9C-9066-C0A27FC62FA0}"
+	ProjectSection(SolutionItems) = preProject
+		idee5 nuget icon.png = idee5 nuget icon.png
+		LICENSE.txt = LICENSE.txt
+		.github\workflows\nuget.yml = .github\workflows\nuget.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Globalization.Web", "idee5.Globalization.Web\idee5.Globalization.Web.csproj", "{FCCE03D6-66EE-4B54-82AD-CF78AFC0B6B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Globalization.WebApi", "idee5.Globalization.WebApi\idee5.Globalization.WebApi.csproj", "{D79B72E2-9F94-4D13-BB0F-90B06DF0A035}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FBBEAEE-6E2E-434F-8A22-4A19A6F4E795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FBBEAEE-6E2E-434F-8A22-4A19A6F4E795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FBBEAEE-6E2E-434F-8A22-4A19A6F4E795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FBBEAEE-6E2E-434F-8A22-4A19A6F4E795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01B74F31-19ED-4436-94BD-714A9FEED172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01B74F31-19ED-4436-94BD-714A9FEED172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01B74F31-19ED-4436-94BD-714A9FEED172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01B74F31-19ED-4436-94BD-714A9FEED172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8CF4A8-B650-4317-81D2-FA61ED93CD58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8CF4A8-B650-4317-81D2-FA61ED93CD58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8CF4A8-B650-4317-81D2-FA61ED93CD58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8CF4A8-B650-4317-81D2-FA61ED93CD58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCCE03D6-66EE-4B54-82AD-CF78AFC0B6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCE03D6-66EE-4B54-82AD-CF78AFC0B6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCCE03D6-66EE-4B54-82AD-CF78AFC0B6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCCE03D6-66EE-4B54-82AD-CF78AFC0B6B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D79B72E2-9F94-4D13-BB0F-90B06DF0A035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D79B72E2-9F94-4D13-BB0F-90B06DF0A035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D79B72E2-9F94-4D13-BB0F-90B06DF0A035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D79B72E2-9F94-4D13-BB0F-90B06DF0A035}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VersionFieldUsingAttrib = True
+		FetchGroupUsingAttrib = True
+		IndexUsingAttrib = False
+		ShowOldMenu = False
+		BuildVersion_StartDate = 2000/1/1
+		SolutionGuid = {09BA3115-4981-438F-8BFD-59B2301C6F52}
+	EndGlobalSection
+EndGlobal

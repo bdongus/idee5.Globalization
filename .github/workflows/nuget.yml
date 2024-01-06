@@ -1,0 +1,41 @@
+# https://github.com/alirezanet/publish-nuget
+name: Build, test & publish
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test  --configuration Release --no-build --verbosity normal
+    - name: Pack
+      uses: alirezanet/publish-nuget@v3.1.0
+      with:
+       PROJECT_FILE_PATH: idee5.Globalization/idee5.Globalization.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+       NO_BUILD: true
+    - name: Publish EFCore implementation
+      uses: alirezanet/publish-nuget@v3.1.0
+      with:
+       PROJECT_FILE_PATH: idee5.Globalization.EFCore/idee5.Globalization.EFCore.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+       NO_BUILD: true
+    - name: Publish web api
+      uses: alirezanet/publish-nuget@v3.1.0
+      with:
+       PROJECT_FILE_PATH: idee5.Globalization.WebApi/idee5.Globalization.WebApi.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+       NO_BUILD: true

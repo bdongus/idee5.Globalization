@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>idee5.Globalization.Test</RootNamespace>
+    <AssemblyName>idee5.Globalization.Test</AssemblyName>
+    <AssemblyVersion>1.0.70.0603</AssemblyVersion>
+    <FileVersion>1.0.70.0603</FileVersion>
+    <Version>1.0.0-beta-68</Version>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="idee5.Common.Data" version="2.0.0" />
+    <PackageReference Include="NSpecifications" Version="1.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\idee5.Globalization.EFCore\idee5.Globalization.EFCore.csproj" />
+  </ItemGroup>
+  <!-- "fix" the wrong assembly name in .net core https://github.com/dotnet/corefx/issues/22101#issuecomment-371018696 -->
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="app.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
+  </Target>
+</Project>

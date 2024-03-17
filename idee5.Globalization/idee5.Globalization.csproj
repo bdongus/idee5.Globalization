@@ -10,12 +10,10 @@
     <LangVersion>12.0</LangVersion>
     <RootNamespace>idee5.Globalization</RootNamespace>
     <AssemblyName>idee5.Globalization</AssemblyName>
-    <AssemblyVersion>3.2.0.0</AssemblyVersion>
-    <FileVersion>3.2.0</FileVersion>
     <Description>Globalization extensions. Enables database support for localization resources and parlances for industries and customers..</Description>
     <Company>idee5</Company>
     <Copyright>© idee5 2016 - 2024</Copyright>
-    <Version>3.2</Version>
+    <Version>3.2.1</Version>
     <PackageTags>idee5, Globalization, Localization</PackageTags>
     <PackageReleaseNotes>Removed own implementation of the resx stuff</PackageReleaseNotes>
     <Nullable>enable</Nullable>

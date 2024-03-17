@@ -1,13 +1,12 @@
 ﻿using idee5.Globalization.Models;
+
 using Microsoft.EntityFrameworkCore;
 
-namespace idee5.Globalization.EFCore
-{
+namespace idee5.Globalization.EFCore {
     /// <summary>
     /// EF Core base context class. The database connection has to be defined in the repository.
     /// </summary>
-    public class GlobalizationDbContext : DbContext
-    {
+    public class GlobalizationDbContext : DbContext {
         /// <summary>
         /// Default connection string name.
         /// </summary>
@@ -16,7 +15,7 @@ namespace idee5.Globalization.EFCore
         /// <summary>
         /// Connection string to the resources storage.
         /// </summary>
-        protected string connectionString;
+        protected string? connectionString;
 
         /// <summary>
         /// Create a context with the given options.
@@ -28,8 +27,7 @@ namespace idee5.Globalization.EFCore
         /// context = new GlobalizationDbContext(contextOptions.Options);
         /// </example>
         public GlobalizationDbContext(DbContextOptions<GlobalizationDbContext> options)
-            : base(options)
-        { }
+            : base(options) { }
 
         /// <summary>
         /// Constructor to allow derived contexts to be resolved by Microsoft DI.
@@ -45,10 +43,9 @@ namespace idee5.Globalization.EFCore
         public DbSet<Resource> Resources { get; set; }
 
         /// <inheritdoc />
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Resource>().ToTable("resrce");
-            modelBuilder.Entity<Resource>().HasKey(r => new { r.ResourceSet, r.Language, r.Industry, r.Customer, r.Id });
+            modelBuilder.Entity<Resource>().HasKey(r => new { r.ResourceSet, r.Language, r.Id, r.Industry, r.Customer });
             modelBuilder.Entity<Resource>().Property(r => r.ResourceSet).HasMaxLength(255).IsRequired();
             modelBuilder.Entity<Resource>().Property(r => r.Language).HasMaxLength(10).HasColumnName("lnguage").IsRequired();
             modelBuilder.Entity<Resource>().Property(r => r.Industry).HasMaxLength(255).IsRequired();

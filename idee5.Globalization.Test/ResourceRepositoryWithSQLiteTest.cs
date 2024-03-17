@@ -1,14 +1,15 @@
-﻿using idee5.Common.Data;
-using idee5.Globalization.Models;
+﻿using idee5.Globalization.Models;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using NSpecifications;
-using System.Linq;
+
 using System.Threading.Tasks;
+
 using static idee5.Globalization.Specifications;
 
-namespace idee5.Globalization.Test
-{
+namespace idee5.Globalization.Test {
     [TestClass]
     public class ResourceRepositoryWithSQLiteTest : WithSQLiteBase
     {
@@ -19,7 +20,7 @@ namespace idee5.Globalization.Test
             resourceUnitOfWork.ResourceRepository.Add(newRes);
             await resourceUnitOfWork.SaveChangesAsync().ConfigureAwait(false);
             ASpec<Resource> testSpec = ResourceId("New") & InResourceSet(Constants.CommonTerms) & NeutralLanguage & CustomerNeutral & IndustryNeutral;
-            Resource result = await resourceUnitOfWork.ResourceRepository.GetSingleAsync(testSpec)
+            Resource? result = await resourceUnitOfWork.ResourceRepository.GetSingleAsync(testSpec)
                 .ConfigureAwait(false);
             Assert.IsNotNull(result);
             Assert.AreEqual(expected: "Nu", actual: result.Value);

@@ -1,4 +1,5 @@
-﻿using idee5.Globalization.Queries;
+﻿using idee5.Globalization.EFCore;
+using idee5.Globalization.Queries;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Threading;
@@ -19,6 +20,18 @@ namespace idee5.Globalization.Test {
             Assert.AreEqual(expected: 1, actual: result.Count);
             // "de-LI" does not exists, so it should be the "de" versions 
             Assert.AreEqual("Vielleicht (Branche + Kunde)", result["Maybe"]);
+        }
+        [TestMethod]
+        public async Task CanGetResourceKeysForResoureSet() {
+            // Arrange
+            var qh = new GetResourceKeysForResourceSetQueryHandler(context);
+
+            // Act
+            var query = new GetResourceKeysForResourceSetQuery(Constants.CommonTerms);
+            var result = await qh.HandleAsync(query, CancellationToken.None).ConfigureAwait(false);
+
+            // Assert
+            Assert.AreEqual(4, result.Count);
         }
     }
 }

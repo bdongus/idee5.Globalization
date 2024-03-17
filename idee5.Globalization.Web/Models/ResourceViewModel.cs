@@ -4,7 +4,7 @@ namespace idee5.Globalization.Web.Models {
     /// <summary>
     /// The resource view model.
     /// </summary>
-    public class ResourceViewModel : Resource {
+    public record ResourceViewModel : Resource {
         private LanguageViewModel _languageItem;
 
         /// <summary>
@@ -12,7 +12,7 @@ namespace idee5.Globalization.Web.Models {
         /// </summary>
         /// <value>The model id</value>
         public string ModelId {
-            get { return string.Format(format: "{0}{1}{2}{3}{4}", args: new object[] { base.ResourceSet, base.Id, base.Language, base.Industry, base.Customer }); }
+            get { return string.Format(format: "{0}{1}{2}{3}{4}", args: [ResourceSet, Id, Language, Industry, Customer]); }
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace idee5.Globalization.Web.Models {
         /// </summary>
         /// <value>The language item</value>
         public LanguageViewModel LanguageItem {
-            get { return _languageItem != null ? _languageItem : base.Language == null ? null : new LanguageViewModel(base.Language, new System.Globalization.CultureInfo(base.Language).NativeName); }
+            get { return _languageItem != null ? _languageItem : Language == null ? null : new LanguageViewModel(Language, new System.Globalization.CultureInfo(Language).NativeName); }
             set { _languageItem = value; }
         }
 
@@ -34,6 +34,5 @@ namespace idee5.Globalization.Web.Models {
         /// </summary>
         /// <value>The textfile</value>
         new public string Textfile { get; set; }
-
     }
 }

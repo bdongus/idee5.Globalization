@@ -1,5 +1,4 @@
-﻿using idee5.Common;
-using idee5.Globalization.Models;
+﻿using idee5.Globalization.Models;
 using NSpecifications;
 using System;
 
@@ -11,37 +10,37 @@ public static class Specifications {
     #region Public Fields
 
     /// <summary>
-    /// Check if the language is NULL or empty.
+    /// Check if the language is NULL or empty
     /// </summary>
     public static readonly ASpec<Resource> NeutralLanguage = new Spec<Resource>(r => String.IsNullOrEmpty(r.Language));
 
     /// <summary>
-    /// Check if <see cref="Resource.BinFile"/> and <see cref="Resource.Textfile" are NULL./>
+    /// Check if <see cref="Resource.BinFile"/> and <see cref="Resource.Textfile"/> are NULL.
     /// </summary>
     public static readonly ASpec<Resource> StringResource = new Spec<Resource>(r => r.BinFile == null && r.Textfile == null);
 
     /// <summary>
-    /// Check if <see cref="Resource.Textfile" is not NULL./>
+    /// Check if <see cref="Resource.Textfile"./> is not NULL
     /// </summary>
     public static readonly ASpec<Resource> TextfileResource = new Spec<Resource>(r => r.Textfile != null);
 
     /// <summary>
-    /// Check if <see cref="Resource.BinFile"/> is not NULL./>
+    /// Check if <see cref="Resource.BinFile"/> is not NULL
     /// </summary>
     public static readonly ASpec<Resource> BinaryFileResource = new Spec<Resource>(r => r.BinFile != null);
 
     /// <summary>
-    /// Check if <see cref="Resource.Industry"/> is NULL or empty.
+    /// Check if <see cref="Resource.Industry"/> is NULL or empty
     /// </summary>
     public static readonly ASpec<Resource> IndustryNeutral = new Spec<Resource>(r => String.IsNullOrEmpty(r.Industry));
 
     /// <summary>
-    /// Check if <see cref="Resource.Customer"/> is NULL or empty.
+    /// Check if <see cref="Resource.Customer"/> is NULL or empty
     /// </summary>
     public static readonly ASpec<Resource> CustomerNeutral = new Spec<Resource>(r => String.IsNullOrEmpty(r.Customer));
 
     /// <summary>
-    /// Check if <see cref="Resource.ResourceSet"/> contains a dot (".").
+    /// Check if <see cref="Resource.ResourceSet"/> contains a dot (".")
     /// </summary>
     public static readonly ASpec<Resource> LocalResources = new Spec<Resource>(r => r.ResourceSet.Contains("."));
 
@@ -50,24 +49,24 @@ public static class Specifications {
     #region Public Methods
 
     /// <summary>
-    /// Checks if the resource is <see cref="CustomerNeutral"/> or of the customer parlance.
+    /// Checks if the resource is <see cref="CustomerNeutral"/> or of the customer parlance
     /// </summary>
-    /// <param name="customerId">Customer parlance id.</param>
-    /// <returns>The combined <see cref="Spec{Resource}"/>.</returns>
+    /// <param name="customerId">Customer parlance id</param>
+    /// <returns>The combined <see cref="Spec{Resource}"/></returns>
     public static ASpec<Resource> CustomerParlance(string? customerId) => CustomerNeutral | new Spec<Resource>(r => r.Customer == customerId);
 
     /// <summary>
-    /// Checks if the resource is <see cref="IndustryNeutral"/> or of the industry parlance.
+    /// Checks if the resource is <see cref="IndustryNeutral"/> or of the industry parlance
     /// </summary>
-    /// <param name="industryId">Industry parlance id.</param>
-    /// <returns>The combined <see cref="Spec{Resource}"/>.</returns>
+    /// <param name="industryId">Industry parlance id</param>
+    /// <returns>The combined <see cref="Spec{Resource}"/></returns>
     public static ASpec<Resource> IndustryParlance(string? industryId) => IndustryNeutral | new Spec<Resource>(r => r.Industry == industryId);
 
     /// <summary>
-    /// Checks if the <see cref="Resource"/> is of the given <see cref="Resource.Language"/>.
+    /// Checks if the <see cref="Resource"/> is of the given <see cref="Resource.Language"/>
     /// </summary>
-    /// <param name="languageId">The BCP 47 language id.</param>
-    /// <returns>The new <see cref="Spec{Resource}"/>.</returns>
+    /// <param name="languageId">The BCP 47 language id</param>
+    /// <returns>The new <see cref="Spec{Resource}"/></returns>
     public static ASpec<Resource> OfLanguage(string? languageId) => new Spec<Resource>(r => r.Language == languageId);
 
     /// <summary>
@@ -77,8 +76,8 @@ public static class Specifications {
     /// <example>de-CH-1901 (the variant of German orthography dating from the 1901 reforms, as seen in Switzerland).
     /// zh-Hant-HK (Traditional Chinese as used in Hong Kong).
     /// </example>
-    /// <param name="languageId">The BCP 47 language id.</param>
-    /// <returns>The new <see cref="Spec{Resource}"/>.</returns>
+    /// <param name="languageId">The BCP 47 language id</param>
+    /// <returns>The new <see cref="Spec{Resource}"/></returns>
     public static ASpec<Resource> OfLanguageOrFallback(string? languageId) => new Spec<Resource>(r => r.Language == languageId
         || (languageId != null && (
             r.Language == languageId.Remove(languageId.LastIndexOf('-') < 0 ? 0 : languageId.LastIndexOf('-'))
@@ -88,17 +87,17 @@ public static class Specifications {
     );
 
     /// <summary>
-    /// Check if the <see cref="Resource"/> is in the given <see cref="Resource.ResourceSet"/>.
+    /// Check if the <see cref="Resource"/> is in the given <see cref="Resource.ResourceSet"/>
     /// </summary>
-    /// <param name="resourceSet">Resource set to check for.</param>
-    /// <returns>The new <see cref="Spec{Resource}"/>.</returns>
+    /// <param name="resourceSet">Resource set to check for</param>
+    /// <returns>The new <see cref="Spec{Resource}"/></returns>
     public static ASpec<Resource> InResourceSet(string resourceSet) => new Spec<Resource>(r => r.ResourceSet == resourceSet);
 
     /// <summary>
-    /// Check if the <see cref="Resource"/> has the given <see cref="Resource.Id"/>.
+    /// Check if the <see cref="Resource"/> has the given <see cref="Resource.Id"/>
     /// </summary>
-    /// <param name="id">Id to check for.</param>
-    /// <returns>The new <see cref="Spec{Resource}"/>.</returns>
+    /// <param name="id">Id to check for</param>
+    /// <returns>The new <see cref="Spec{Resource}"/></returns>
     public static ASpec<Resource> ResourceId(string id) => new Spec<Resource>(r => r.Id == id);
 
     #endregion Public Methods

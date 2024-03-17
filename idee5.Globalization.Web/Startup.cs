@@ -12,6 +12,8 @@ using idee5.Globalization.WebApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using idee5.Globalization.Configuration;
+using idee5.AspNetCore;
+using idee5.Globalization.Repositories;
 
 namespace idee5.Globalization.Web {
     public class Startup(IConfiguration configuration) {
@@ -27,7 +29,10 @@ namespace idee5.Globalization.Web {
             // add the EF Core localization implementation
             services.AddEFCoreLocalization(o => o.UseSqlite(new SimpleDB3ConnectionStringProvider().GetConnectionString("idee5.Resources.db3")));
             // add the localization controllers
-            services.AddMvc().AddLocalizationControllers();
+            services.AddMvc().AddLocalizationControllers().ConfigureApplicationPartManager(apm => {
+                // add the handler(s) from the EF core implementation
+                apm.FeatureProviders.Add(new QueryControllerProvider(typeof(GetResourceKeysForResourceSetQueryHandler).Assembly));
+            });
             // configure the authorization policy
             services.AddAuthorizationBuilder()
                 .AddPolicy("CommandPolicy", p => p.RequireAssertion(_ => true))
@@ -46,8 +51,8 @@ namespace idee5.Globalization.Web {
                     };
                 };
             });
-            services.RegisterHandlers(typeof(IQueryHandlerAsync<,>));
-            services.RegisterHandlers(typeof(ICommandHandlerAsync<>));
+            services.RegisterQueryHandlers();
+            services.RegisterCommandHandlers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

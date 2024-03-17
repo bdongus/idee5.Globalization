@@ -61,7 +61,7 @@ public class GetNestedJsonParlanceResourcesQueryHandler : IQueryHandlerAsync<Get
             // if there is another level, dive deeper
             var p = parentNode.GetPropertyByName(levels[0]) ?? new ExpandoObject();
             parentNode.AddProperty(levels[0], p);
-            AddChildren(p as ExpandoObject, levels.Skip(1).ToArray(), value);
+            AddChildren((ExpandoObject)p, levels.Skip(1).ToArray(), value);
         } else {
             // the bottom is reached, set the property value
             parentNode.AddProperty(levels[0], value);

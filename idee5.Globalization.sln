@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Globalization.EFCore"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{30A1A31F-1FFA-4C9C-9066-C0A27FC62FA0}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		idee5 nuget icon.png = idee5 nuget icon.png
 		LICENSE.txt = LICENSE.txt
 		.github\workflows\nuget.yml = .github\workflows\nuget.yml
@@ -51,11 +52,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VersionFieldUsingAttrib = True
-		FetchGroupUsingAttrib = True
-		IndexUsingAttrib = False
-		ShowOldMenu = False
-		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {09BA3115-4981-438F-8BFD-59B2301C6F52}
+		BuildVersion_StartDate = 2000/1/1
+		ShowOldMenu = False
+		IndexUsingAttrib = False
+		FetchGroupUsingAttrib = True
+		VersionFieldUsingAttrib = True
 	EndGlobalSection
 EndGlobal

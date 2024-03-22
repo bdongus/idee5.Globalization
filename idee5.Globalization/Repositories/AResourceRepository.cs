@@ -27,7 +27,7 @@ public abstract class AResourceRepository : ACompositeKeyRepository<Resource>, I
     #region Public Methods
 
     /// <inheritdoc/>
-    public abstract Task<List<string>> SearchResourceSetsAsync(string contains, CancellationToken cancellationToken = default);
+    public abstract Task<List<string>> SearchResourceSetsAsync(string searchValue, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
     public override async Task UpdateOrAddAsync(Resource resource, CancellationToken cancellationToken = default) {

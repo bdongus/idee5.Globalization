@@ -14,8 +14,8 @@
     <Description>Entity Framework Core context provider for idee5.Globalization.</Description>
     <Copyright>© idee5 2022-2024</Copyright>
     <PackageTags>idee5, Globalization, Localization, EFCore</PackageTags>
-    <PackageReleaseNotes>Added get resource keys query</PackageReleaseNotes>
-    <Version>3.2.1</Version>
+    <PackageReleaseNotes>Search queries added</PackageReleaseNotes>
+    <Version>3.3</Version>
     <Authors>Bernd Dongus</Authors>
     <Nullable>enable</Nullable>
     <Title>EF core data layer for idee5.Globalization</Title>

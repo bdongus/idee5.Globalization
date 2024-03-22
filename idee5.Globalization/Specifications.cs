@@ -100,5 +100,40 @@ public static class Specifications {
     /// <returns>The new <see cref="Spec{Resource}"/></returns>
     public static ASpec<Resource> ResourceId(string id) => new Spec<Resource>(r => r.Id == id);
 
+    /// <summary>
+    /// Search the for a value in the resource set property
+    /// </summary>
+    /// <param name="searchValue">The search value.</param>
+    /// <returns>An ASpec</returns>
+    public static ASpec<Resource> ResourceSetContains(string searchValue) => new Spec<Resource>(r =>r.ResourceSet.Contains(searchValue));
+
+    /// <summary>
+    /// Search the for a value in the resource set, id, value,industry, customer or comment
+    /// </summary>
+    /// <param name="searchValue">The search value.</param>
+    /// <returns>An ASpec</returns>
+    public static ASpec<Resource> Contains(string searchValue) => new Spec<Resource>(r =>
+        r.ResourceSet.Contains(searchValue)
+        || r.Id.Contains(searchValue)
+        || r.Value.Contains(searchValue)
+        || (r.Industry != null && r.Industry.Contains(searchValue))
+        || (r.Customer != null && r.Customer.Contains(searchValue))
+        || (r.Comment !=null && r.Comment.Contains(searchValue))
+    );
+
+    /// <summary>
+    /// Search the for a value in the resource set, id, value,industry, customer or comment
+    /// </summary>
+    /// <param name="resourceSet">Resource set to search in.</param>
+    /// <param name="searchValue">The search value.</param>
+    /// <returns>An ASpec</returns>
+    public static ASpec<Resource> ContainsInResourceSet(string resourceSet, string searchValue) => new Spec<Resource>(r =>
+        r.ResourceSet == resourceSet
+        && (r.Id.Contains(searchValue)
+        || r.Value.Contains(searchValue)
+        || (r.Industry != null && r.Industry.Contains(searchValue))
+        || (r.Customer != null && r.Customer.Contains(searchValue))
+        || (r.Comment !=null && r.Comment.Contains(searchValue)))
+    );
     #endregion Public Methods
 }

@@ -50,6 +50,8 @@ namespace idee5.Globalization.Test {
             var inputHandler = new ResxFileInputHandler();
             var outputHandler = new DataAnnotationValidationCommandHandlerAsync<ImportResourcesCommand>(recursiveAnnotationsValidator, validationReporter, handler);
             var converter = new DataConverterAsync<ResxFileInputHandlerQuery, ImportResourcesCommand>(inputHandler, outputHandler);
+            
+            // TODO: var converter = new AsyncDataImporter<ResxFileInputHandlerQuery, ImportResourcesCommand, NoCleanupCommand>(inputHandler, outputHandler,new NoCleanupCommandHandler());
             var query = new ResxFileInputHandlerQuery("", "", null, null, null) {
                 Path = "ImportTes.resx",
                 ResourceSet = "testset",

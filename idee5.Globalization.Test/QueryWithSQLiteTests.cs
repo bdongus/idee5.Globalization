@@ -33,5 +33,54 @@ namespace idee5.Globalization.Test {
             // Assert
             Assert.AreEqual(4, result.Count);
         }
+        [TestMethod]
+        public async Task CanFindResourceKeysInResourceSetByValue() {
+            // Arrange
+            var qh = new SearchResourceKeysForResourceSetQueryHandler(context);
+
+            // Act
+            var query = new SearchResourceKeysForResourceSetQuery(Constants.CommonTerms, "May");
+            var result = await qh.HandleAsync(query, CancellationToken.None).ConfigureAwait(false);
+
+            // Assert
+            Assert.AreEqual(4, result.Count);
+        }
+        [TestMethod]
+        public async Task CanFindResourceKeysInResourceSetByCustomer() {
+            // Arrange
+            var qh = new SearchResourceKeysForResourceSetQueryHandler(context);
+
+            // Act
+            var query = new SearchResourceKeysForResourceSetQuery(Constants.CommonTerms, "idee5");
+            var result = await qh.HandleAsync(query, CancellationToken.None).ConfigureAwait(false);
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
+        }
+        [TestMethod]
+        public async Task CanFindValueInResourceKeys() {
+            // Arrange
+            var qh = new SearchResourceKeysQueryHandler(context);
+
+            // Act
+            var query = new SearchResourceKeysQuery("May");
+            var result = await qh.HandleAsync(query, CancellationToken.None).ConfigureAwait(false);
+
+            // Assert
+            Assert.AreEqual(4, result.Count);
+        }
+
+        [TestMethod]
+        public async Task CanFindResourceSetInResourceKeys() {
+            // Arrange
+            var qh = new SearchResourceKeysQueryHandler(context);
+
+            // Act
+            var query = new SearchResourceKeysQuery("Terms");
+            var result = await qh.HandleAsync(query, CancellationToken.None).ConfigureAwait(false);
+
+            // Assert
+            Assert.AreEqual(4, result.Count);
+        }
     }
 }

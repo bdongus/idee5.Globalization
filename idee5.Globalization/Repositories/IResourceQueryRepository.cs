@@ -10,7 +10,7 @@ public interface IResourceQueryRepository : IQueryRepository<Resource> {
     /// <summary>
     /// Search resource sets containing a given string
     /// </summary>
-    /// <param contains="contains">String to search for</param>
+    /// <param name="searchValue">String to search for</param>
     /// <returns>List of found resource sets</returns>
-    Task<List<string>> SearchResourceSetsAsync(string contains, CancellationToken cancellationToken = default);
+    Task<List<string>> SearchResourceSetsAsync(string searchValue, CancellationToken cancellationToken = default);
 }

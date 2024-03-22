@@ -11,10 +11,11 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace idee5.Globalization.EFCore;
+
 /// <summary>
-/// Handler for reading the keys of a resource set. Including all parlances.
+/// The search resource keys query handler.
 /// </summary>
-public class GetResourceKeysForResourceSetQueryHandler : IQueryHandlerAsync<GetResourceKeysForResourceSetQuery, IList<ResourceKey>> {
+public class SearchResourceKeysQueryHandler : IQueryHandlerAsync<SearchResourceKeysQuery, IList<ResourceKey>> {
     #region Private Fields
 
     private readonly GlobalizationDbContext _context;
@@ -23,7 +24,7 @@ public class GetResourceKeysForResourceSetQueryHandler : IQueryHandlerAsync<GetR
 
     #region Public Constructors
 
-    public GetResourceKeysForResourceSetQueryHandler(GlobalizationDbContext context) => _context = context;
+    public SearchResourceKeysQueryHandler(GlobalizationDbContext context) => _context = context;
 
     #endregion Public Constructors
 
@@ -34,9 +35,9 @@ public class GetResourceKeysForResourceSetQueryHandler : IQueryHandlerAsync<GetR
     /// </summary>
     /// <param name="query">The query.</param>
     /// <exception cref="ArgumentNullException"><paramref name="query"/> is <c>null</c>.</exception>
-    public async Task<IList<ResourceKey>> HandleAsync(GetResourceKeysForResourceSetQuery query, CancellationToken cancellationToken = default) {
+    public async Task<IList<ResourceKey>> HandleAsync(SearchResourceKeysQuery query, CancellationToken cancellationToken = default) {
         ArgumentNullException.ThrowIfNull(query);
-        return await _context.Resources.Where(Specifications.InResourceSet(query.ResourceSet)).Select(r => new ResourceKey() {
+        return await _context.Resources.Where(Specifications.Contains(query.SearchValue)).Select(r => new ResourceKey() {
             // just casting results in all records being read
             ResourceSet = r.ResourceSet,
             Id          = r.Id,

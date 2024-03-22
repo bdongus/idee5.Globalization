@@ -13,9 +13,9 @@
     <Description>Globalization extensions. Enables database support for localization resources and parlances for industries and customers..</Description>
     <Company>idee5</Company>
     <Copyright>© idee5 2016 - 2024</Copyright>
-    <Version>3.2.1</Version>
+    <Version>3.3</Version>
     <PackageTags>idee5, Globalization, Localization</PackageTags>
-    <PackageReleaseNotes>Removed own implementation of the resx stuff</PackageReleaseNotes>
+    <PackageReleaseNotes>Search queries added</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <Authors>Bernd Dongus</Authors>
     <Title>Globalization tool for parlances for industries and customers</Title>
@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="idee5.Common" Version="4.0.0" />
-    <PackageReference Include="idee5.Common.Data" Version="2.1.1" />
+    <PackageReference Include="idee5.Common.Data" Version="2.2.0" />
     <PackageReference Include="IsExternalInit" Version="1.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

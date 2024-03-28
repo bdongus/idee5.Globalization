@@ -4,6 +4,8 @@ using idee5.Globalization.Queries;
 
 using Microsoft.EntityFrameworkCore;
 
+using NSpecifications;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,14 +33,16 @@ public class SearchResourceKeysForResourceSetQueryHandler : IQueryHandlerAsync<S
     #region Public Methods
 
     /// <summary>
-    /// Query the resource ids in a resource set. Including all parlances.
+    /// Search the resource keys in a resource set
     /// </summary>
     /// <param name="query">The query.</param>
     /// <exception cref="ArgumentNullException"><paramref name="query"/> is <c>null</c>.</exception>
     public async Task<IList<ResourceKey>> HandleAsync(SearchResourceKeysForResourceSetQuery query, CancellationToken cancellationToken = default) {
         ArgumentNullException.ThrowIfNull(query);
-        return await _context.Resources.Where(Specifications.ContainsInResourceSet(query.ResourceSet, query.SearchValue)).Select(r => new ResourceKey() {
-            // just casting results in all records being read
+
+        ASpec<Resource> predicate = query.SearchValue == null ? Specifications.InResourceSet(query.ResourceSet) : Specifications.ContainsInResourceSet(query.ResourceSet, query.SearchValue);
+        return await _context.Resources.Where(predicate).Select(r => new ResourceKey() {
+            // just casting, results in all records being read
             ResourceSet = r.ResourceSet,
             Id          = r.Id,
             Industry    = r.Industry,

@@ -15,7 +15,7 @@
     <Copyright>© idee5 2022-2024</Copyright>
     <PackageTags>idee5, Globalization, Localization, EFCore</PackageTags>
     <PackageReleaseNotes>Search queries added</PackageReleaseNotes>
-    <Version>3.3</Version>
+    <Version>3.3.1</Version>
     <Authors>Bernd Dongus</Authors>
     <Nullable>enable</Nullable>
     <Title>EF core data layer for idee5.Globalization</Title>

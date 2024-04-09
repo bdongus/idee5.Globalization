@@ -49,7 +49,7 @@ public class GetAllParlanceResourcesQueryHandler : IQueryHandlerAsync<GetAllParl
         ASpec<Resource> customerClause = String.IsNullOrEmpty(query.CustomerId) ? CustomerNeutral : CustomerParlance(query.CustomerId);
         ASpec<Resource> whereClause = industryClause & customerClause;
         if (query.LocalResources != null)
-            whereClause &= query.LocalResources == true ? LocalResources : !LocalResources;
+            whereClause &= query.LocalResources == true ? IsLocalResources : !IsLocalResources;
         List<Resource> resList = await _repository.GetAsync(whereClause, cancellationToken).ConfigureAwait(false);
         // TODO: Let the database do the ordering and grouping
         return resList.OrderBy(r => r.ResourceSet).ThenBy(r => r.Language).ThenBy(r => r.Id).ThenByDescending(r => r.Industry).ThenByDescending(r => r.Customer)

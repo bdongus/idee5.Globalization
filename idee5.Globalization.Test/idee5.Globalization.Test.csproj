@@ -30,6 +30,7 @@
   
   <ItemGroup>
     <PackageReference Include="idee5.Common.Data" version="2.2.0" />
+    <PackageReference Include="MELT" Version="0.9.0" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\idee5.Globalization.EFCore\idee5.Globalization.EFCore.csproj" />
+    <ProjectReference Include="..\idee5.Globalization\idee5.Globalization.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Resources\Icon1.ico">

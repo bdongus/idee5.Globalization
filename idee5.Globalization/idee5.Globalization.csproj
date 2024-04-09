@@ -13,9 +13,9 @@
     <Description>Globalization extensions. Enables database support for localization resources and parlances for industries and customers..</Description>
     <Company>idee5</Company>
     <Copyright>© idee5 2016 - 2024</Copyright>
-    <Version>3.4.0</Version>
+    <Version>3.5.0</Version>
     <PackageTags>idee5, Globalization, Localization</PackageTags>
-    <PackageReleaseNotes>Resx import updated to AsyncDataImporter</PackageReleaseNotes>
+    <PackageReleaseNotes>Update resource key added</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <Authors>Bernd Dongus</Authors>
     <Title>Globalization tool for parlances for industries and customers</Title>

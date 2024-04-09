@@ -39,6 +39,7 @@ namespace idee5.Globalization.Test {
             _connection = new SqliteConnection("DataSource=:memory:");
             _connection.Open();
             contextOptions.UseSqlite(_connection);
+            contextOptions.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
             contextOptions.EnableSensitiveDataLogging();
             context = new GlobalizationDbContext(contextOptions.Options);
             context.Database.EnsureDeleted();

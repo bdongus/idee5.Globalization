@@ -1,6 +1,9 @@
-﻿using idee5.Globalization.Models;
+﻿using idee5.Common;
+using idee5.Globalization.Models;
 using NSpecifications;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace idee5.Globalization;
 /// <summary>
@@ -42,7 +45,7 @@ public static class Specifications {
     /// <summary>
     /// Check if <see cref="Resource.ResourceSet"/> contains a dot (".")
     /// </summary>
-    public static readonly ASpec<Resource> LocalResources = new Spec<Resource>(r => r.ResourceSet.Contains("."));
+    public static readonly ASpec<Resource> IsLocalResources = new Spec<Resource>(r => r.ResourceSet.Contains("."));
 
     #endregion Public Fields
 
@@ -124,8 +127,8 @@ public static class Specifications {
     /// <summary>
     /// Search the for a value in the resource set, id, value,industry, customer or comment
     /// </summary>
-    /// <param name="resourceSet">Resource set to search in.</param>
-    /// <param name="searchValue">The search value.</param>
+    /// <param name="resourceSet">Resource set to search in</param>
+    /// <param name="searchValue">The search value</param>
     /// <returns>An ASpec</returns>
     public static ASpec<Resource> ContainsInResourceSet(string resourceSet, string searchValue) => new Spec<Resource>(r =>
         r.ResourceSet == resourceSet
@@ -135,5 +138,23 @@ public static class Specifications {
         || (r.Customer != null && r.Customer.Contains(searchValue))
         || (r.Comment !=null && r.Comment.Contains(searchValue)))
     );
+
+    /// <summary>
+    /// Select all resources of a specific <see cref="ResourceKey"/>
+    /// </summary>
+    /// <param name="resourceKey">The resource key</param>
+    /// <returns>An ASpec</returns>
+    public static ASpec<Resource> OfResourceKey(ResourceKey resourceKey) => new Spec<Resource>(r =>
+        r.ResourceSet == resourceKey.ResourceSet
+        && r.Id       == resourceKey.Id
+        && (r.Industry == resourceKey.Industry || r.Industry == "" && resourceKey.Industry == null)
+        && (r.Customer == resourceKey.Customer || r.Customer == "" && resourceKey.Customer == null));
+
+    /// <summary>
+    /// Check if <see cref="Resource.Language"/> is one of the given language codes
+    /// </summary>
+    /// <param name="translations">The language codes</param>
+    /// <returns>An ASpec</returns>
+    public static ASpec<Resource> TranslatedTo(IEnumerable<string> translations) => new Spec<Resource>(r => translations.Contains(r.Language ?? ""));
     #endregion Public Methods
 }

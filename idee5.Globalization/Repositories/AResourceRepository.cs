@@ -41,11 +41,12 @@ public abstract class AResourceRepository : ACompositeKeyRepository<Resource>, I
             throw new ArgumentNullException(nameof(resource.Value));
         }
 
+        // from the domain perspective the following properties can be NULL
+        // from the database perspective composite key columns cannot
         resource.Language ??= String.Empty;
         if (resource.Language.Length > 0)
             _ = new CultureInfo(resource.Language); // throws an exception if not valid.
 
-        // default values
         resource.Industry ??= String.Empty;
         resource.Customer ??= String.Empty;
 

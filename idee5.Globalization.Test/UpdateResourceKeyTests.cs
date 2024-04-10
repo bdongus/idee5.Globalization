@@ -35,11 +35,9 @@ public class UpdateResourceKeyTests : UnitTestBase {
         // Arrange
         var handler = new UpdateResourceKeyCommandHandler(resourceUnitOfWork, new NullLogger<UpdateResourceKeyCommandHandler>());
         var rk = new ResourceKey() { ResourceSet = _resourceSet, Id ="DeRemove" };
-        var translations = new Dictionary<string, string> {
-            { "en-GB", "lsmf" },
-            { "it", "xyz" }
-        };
-        var command = new UpdateResourceKeyCommand(rk, translations.ToImmutableDictionary());
+
+        var translations = ImmutableList.Create(new Translation("en-GB", "lsmf"), new Translation("it", "xyz", "abc"));
+        var command = new UpdateResourceKeyCommand(rk, translations);
 
         // Act
         await handler.HandleAsync(command, CancellationToken.None).ConfigureAwait(false);
@@ -49,6 +47,7 @@ public class UpdateResourceKeyTests : UnitTestBase {
         Assert.AreEqual(2, rsc.Count);
         Assert.AreEqual("lsmf", rsc.SingleOrDefault(r => r.Language == "en-GB")?.Value);
         Assert.AreEqual("xyz", rsc.SingleOrDefault(r => r.Language == "it")?.Value);
+        Assert.AreEqual("abc", rsc.SingleOrDefault(r => r.Language == "it")?.Comment);
     }
 
     [TestMethod]
@@ -58,11 +57,8 @@ public class UpdateResourceKeyTests : UnitTestBase {
         var logger = loggerFactory.CreateLogger<UpdateResourceKeyCommandHandler>();
         var handler = new UpdateResourceKeyCommandHandler(resourceUnitOfWork, logger);
         var rk = new ResourceKey() { ResourceSet = _resourceSet, Id ="LogTest" };
-        var translations = new Dictionary<string, string> {
-            { "en-GB", "lsmf" },
-            { "it", "xyz" }
-        };
-        var command = new UpdateResourceKeyCommand(rk, translations.ToImmutableDictionary());
+        var translations = ImmutableList.Create(new Translation("en-GB", "lsmf"), new Translation("it", "xyz"));
+        var command = new UpdateResourceKeyCommand(rk, translations);
 
         // Act
         await handler.HandleAsync(command, CancellationToken.None).ConfigureAwait(false);

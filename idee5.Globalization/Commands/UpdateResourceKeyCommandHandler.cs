@@ -33,11 +33,11 @@ public class UpdateResourceKeyCommandHandler : ICommandHandlerAsync<UpdateResour
         };
         // first remove all missing translations
         _logger.RemovingTranslations();
-        await _unitOfWork.ResourceRepository.RemoveAsync(Specifications.OfResourceKey(baseResource) & !Specifications.TranslatedTo(command.Translations.Keys), cancellationToken).ConfigureAwait(false);
+        await _unitOfWork.ResourceRepository.RemoveAsync(Specifications.OfResourceKey(baseResource) & !Specifications.TranslatedTo(command.Translations.Select(t => t.Language)), cancellationToken).ConfigureAwait(false);
 
         // then update or add the given translations
         foreach (var translation in command.Translations) {
-            Resource rsc = baseResource with { Language = translation.Key, Value = translation.Value };
+            Resource rsc = baseResource with { Language = translation.Language, Value = translation.Value, Comment = translation.Comment };
             _logger.CreateOrUpdateResource(rsc);
             await _unitOfWork.ResourceRepository.UpdateOrAddAsync(rsc, cancellationToken).ConfigureAwait(false);
         }

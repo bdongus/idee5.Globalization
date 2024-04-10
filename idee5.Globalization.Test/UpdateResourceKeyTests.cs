@@ -33,11 +33,11 @@ public class UpdateResourceKeyTests : UnitTestBase {
     [TestMethod]
     public async Task CanCreateUpdateAndDeleteTranslation() {
         // Arrange
-        var handler = new UpdateResourceKeyCommandHandler(resourceUnitOfWork, new NullLogger<UpdateResourceKeyCommandHandler>());
+        var handler = new CreateOrUpdateResourceKeyCommandHandler(resourceUnitOfWork, new NullLogger<CreateOrUpdateResourceKeyCommandHandler>());
         var rk = new ResourceKey() { ResourceSet = _resourceSet, Id ="DeRemove" };
 
         var translations = ImmutableList.Create(new Translation("en-GB", "lsmf"), new Translation("it", "xyz", "abc"));
-        var command = new UpdateResourceKeyCommand(rk, translations);
+        var command = new CreateOrUpdateResourceKeyCommand(rk, translations);
 
         // Act
         await handler.HandleAsync(command, CancellationToken.None).ConfigureAwait(false);
@@ -54,15 +54,14 @@ public class UpdateResourceKeyTests : UnitTestBase {
     public async Task CanCreateLogs() {
         // Arrange
         var loggerFactory = TestLoggerFactory.Create();
-        var logger = loggerFactory.CreateLogger<UpdateResourceKeyCommandHandler>();
-        var handler = new UpdateResourceKeyCommandHandler(resourceUnitOfWork, logger);
+        var logger = loggerFactory.CreateLogger<CreateOrUpdateResourceKeyCommandHandler>();
+        var handler = new CreateOrUpdateResourceKeyCommandHandler(resourceUnitOfWork, logger);
         var rk = new ResourceKey() { ResourceSet = _resourceSet, Id ="LogTest" };
         var translations = ImmutableList.Create(new Translation("en-GB", "lsmf"), new Translation("it", "xyz"));
-        var command = new UpdateResourceKeyCommand(rk, translations);
+        var command = new CreateOrUpdateResourceKeyCommand(rk, translations);
 
         // Act
         await handler.HandleAsync(command, CancellationToken.None).ConfigureAwait(false);
-
 
         // Assert
         Assert.AreEqual(4, loggerFactory.Sink.LogEntries.Count());

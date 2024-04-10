@@ -11,7 +11,6 @@ namespace idee5.Globalization.WebApi {
         /// <param name="builder">The <see cref="IMvcBuilder" /> to add builder to</param>
         /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC builder</returns>
         public static IMvcBuilder AddLocalizationControllers(this IMvcBuilder builder) {
-
             // install the globalization controllers
             Assembly asm = typeof(AResourceRepository).Assembly;
             return builder

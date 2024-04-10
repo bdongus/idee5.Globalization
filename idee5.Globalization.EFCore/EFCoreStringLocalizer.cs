@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace idee5.Globalization.EFCore;
+/// <summary>
+/// The EF core string localizer.
+/// </summary>
 public class EFCoreStringLocalizer : DatabaseStringLocalizer {
     private readonly IDbContextFactory<GlobalizationDbContext> _contextFactory;
 

@@ -13,7 +13,7 @@
     <Description>Globalization extensions. Enables database support for localization resources and parlances for industries and customers..</Description>
     <Company>idee5</Company>
     <Copyright>© idee5 2016 - 2024</Copyright>
-    <Version>3.5.1</Version>
+    <Version>3.5.2</Version>
     <PackageTags>idee5, Globalization, Localization</PackageTags>
     <PackageReleaseNotes>Update resource key with comment support</PackageReleaseNotes>
     <Nullable>enable</Nullable>
@@ -47,13 +47,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.4" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
     <PackageReference Include="NSpecifications" Version="1.1.0" />
     <PackageReference Include="ResXResourceReader.NetStandard" Version="1.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>
   <ItemGroup>

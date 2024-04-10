@@ -21,7 +21,6 @@ public abstract class AResourceRepository : ACompositeKeyRepository<Resource>, I
     protected readonly string[] _bitmapExtensions = ["GIF", "JPG", "PNG", "BMP", "JPEG"];
     protected readonly string[] _textExtensions = ["TXT", "XML", "CSS", "JS", "HTM", "HTML", "CONFIG", "CSHTML", "JSON"];
 
-
     #endregion Protected Fields
 
     #region Public Methods

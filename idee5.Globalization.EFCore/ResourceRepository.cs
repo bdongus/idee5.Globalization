@@ -90,6 +90,7 @@ namespace idee5.Globalization.EFCore {
             }
         }
 
+        /// <inheritdoc/>
         public override Task<List<string>> SearchResourceSetsAsync(string contains, CancellationToken cancellationToken = default) {
             return _context.Resources.Where(r => r.ResourceSet.Contains(contains))
                 .Select(r => r.ResourceSet).Distinct().ToListAsync(cancellationToken);

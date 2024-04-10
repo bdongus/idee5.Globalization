@@ -6,7 +6,6 @@ namespace idee5.Globalization.Test
 {
     [TestClass]
     public class DatabaseResourceManagerTest : UnitTestBase {
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.

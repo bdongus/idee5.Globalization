@@ -5,7 +5,6 @@ using idee5.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace idee5.Globalization.WebApi.Controllers {
-
     /// <summary>
     /// Generic query controller.
     /// </summary>

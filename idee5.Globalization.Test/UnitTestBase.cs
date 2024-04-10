@@ -12,12 +12,13 @@ namespace idee5.Globalization.Test {
     /// </summary>
     [TestClass]
     public class UnitTestBase : IDisposable {
-        public static GlobalizationDbContext context;
-        protected IResourceRepository repository;
-        protected IResourceQueryRepository queryRepository;
-        protected IResourceUnitOfWork resourceUnitOfWork;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2211:Nicht konstante Felder dürfen nicht sichtbar sein", Justification = "The enum converter tests use it")]
+        public static GlobalizationDbContext context = null!;
+        protected IResourceRepository repository = null!;
+        protected IResourceQueryRepository queryRepository = null!;
+        protected IResourceUnitOfWork resourceUnitOfWork = null!;
 
-        internal SqliteConnection _connection;
+        internal SqliteConnection _connection = null!;
 
         internal class ContextFactory : IDbContextFactory<GlobalizationDbContext> {
             private readonly UnitTestBase _parent;

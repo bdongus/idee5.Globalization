@@ -13,4 +13,6 @@ internal static partial  class Log {
     public static partial void RemovingTranslations(this ILogger logger);
     [LoggerMessage(4, LogLevel.Debug, "Create or update Resource: {Resource}")]
     public static partial void CreateOrUpdateResource(this ILogger logger, Resource Resource);
+    [LoggerMessage(5, LogLevel.Information, "Deleting Resource key: {Key}")]
+    public static partial void DeletingResourceKey(this ILogger logger, ResourceKey Key);
 }

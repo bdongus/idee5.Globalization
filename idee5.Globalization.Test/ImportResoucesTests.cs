@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace idee5.Globalization.Test; 
+namespace idee5.Globalization.Test;
 [TestClass]
 public class ImportResoucesTests : WithSQLiteBase {
     [TestMethod]

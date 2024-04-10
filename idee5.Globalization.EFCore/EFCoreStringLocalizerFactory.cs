@@ -5,6 +5,9 @@ using System;
 
 namespace idee5.Globalization.EFCore;
 
+/// <summary>
+/// The EF core string localizer factory.
+/// </summary>
 public class EFCoreStringLocalizerFactory : DatabaseStringLocalizerFactory {
     private readonly IDbContextFactory<GlobalizationDbContext> _contextFactory;
 

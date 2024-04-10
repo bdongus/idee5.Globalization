@@ -8,12 +8,15 @@ using System.Linq;
 
 namespace idee5.Globalization;
 
+/// <summary>
+/// Base class for database string localizers
+/// </summary>
 public abstract class DatabaseStringLocalizer : IStringLocalizer {
     private readonly DatabaseResourceManager _resourceManager;
     protected readonly string? _industry;
     protected readonly string? _customer;
 
-    public DatabaseStringLocalizer(DatabaseResourceManager resourceManager, IOptions<LocalizationParlanceOptions> options) {
+    protected DatabaseStringLocalizer(DatabaseResourceManager resourceManager, IOptions<LocalizationParlanceOptions> options) {
         _resourceManager = resourceManager;
         _industry = options.Value.Industry;
         _customer = options.Value.Customer;

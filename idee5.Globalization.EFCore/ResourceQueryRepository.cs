@@ -1,19 +1,20 @@
 ﻿using idee5.Globalization.Models;
 using idee5.Globalization.Repositories;
+
 using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace idee5.Globalization.EFCore {
     /// <inheritdoc />
     public class ResourceQueryRepository : IResourceQueryRepository {
         /// <summary>
-        /// EF core context. 
+        /// EF core context.
         /// </summary>
         protected readonly GlobalizationDbContext _context;
 
@@ -45,10 +46,12 @@ namespace idee5.Globalization.EFCore {
             return _context.Resources.AsNoTracking().Where(predicate).ToListAsync(cancellationToken);
         }
 
+        /// <inheritdoc/>
         public Task<Resource?> GetSingleAsync(Expression<Func<Resource, bool>> predicate, CancellationToken cancellationToken = default) {
             return _context.Resources.AsNoTracking().SingleOrDefaultAsync(predicate, cancellationToken);
         }
 
+        /// <inheritdoc/>
         public Task<List<string>> SearchResourceSetsAsync(string contains, CancellationToken cancellationToken = default) {
             return _context.Resources.AsNoTracking()
                 .Where(r => r.ResourceSet.Contains(contains))

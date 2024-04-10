@@ -11,19 +11,19 @@ using System.Threading.Tasks;
 namespace idee5.Globalization.Commands;
 
 /// <summary>
-/// The update resource key command handler. Removes translations NOT in the given list.
+/// The update or add resource key command handler. Removes translations NOT in the given list.
 /// </summary>
-public class UpdateResourceKeyCommandHandler : ICommandHandlerAsync<UpdateResourceKeyCommand> {
+public class CreateOrUpdateResourceKeyCommandHandler : ICommandHandlerAsync<CreateOrUpdateResourceKeyCommand> {
     private readonly IResourceUnitOfWork _unitOfWork;
-    private readonly ILogger<UpdateResourceKeyCommandHandler> _logger;
+    private readonly ILogger<CreateOrUpdateResourceKeyCommandHandler> _logger;
 
-    public UpdateResourceKeyCommandHandler(IResourceUnitOfWork unitOfWork, ILogger<UpdateResourceKeyCommandHandler> logger) {
+    public CreateOrUpdateResourceKeyCommandHandler(IResourceUnitOfWork unitOfWork, ILogger<CreateOrUpdateResourceKeyCommandHandler> logger) {
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
 
     /// <inheritdoc/>
-    public async Task HandleAsync(UpdateResourceKeyCommand command, CancellationToken cancellationToken = default) {
+    public async Task HandleAsync(CreateOrUpdateResourceKeyCommand command, CancellationToken cancellationToken = default) {
         _logger.TranslationsReceived(command.Translations.Count, command);
         Resource baseResource = new() {
             ResourceSet = command.ResourceSet,
@@ -36,7 +36,7 @@ public class UpdateResourceKeyCommandHandler : ICommandHandlerAsync<UpdateResour
         await _unitOfWork.ResourceRepository.RemoveAsync(Specifications.OfResourceKey(baseResource) & !Specifications.TranslatedTo(command.Translations.Select(t => t.Language)), cancellationToken).ConfigureAwait(false);
 
         // then update or add the given translations
-        foreach (var translation in command.Translations) {
+        foreach (Translation translation in command.Translations) {
             Resource rsc = baseResource with { Language = translation.Language, Value = translation.Value, Comment = translation.Comment };
             _logger.CreateOrUpdateResource(rsc);
             await _unitOfWork.ResourceRepository.UpdateOrAddAsync(rsc, cancellationToken).ConfigureAwait(false);

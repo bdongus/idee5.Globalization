@@ -7,10 +7,13 @@ using System.Reflection;
 
 namespace idee5.Globalization;
 
+/// <summary>
+/// Base class for database string localizer factories
+/// </summary>
 public abstract class DatabaseStringLocalizerFactory : IStringLocalizerFactory {
     protected readonly IOptions<LocalizationParlanceOptions> _options;
     private readonly ConcurrentDictionary<string, DatabaseStringLocalizer> _localizerCache = new();
-    public DatabaseStringLocalizerFactory(IOptions<LocalizationParlanceOptions> options) {
+    protected DatabaseStringLocalizerFactory(IOptions<LocalizationParlanceOptions> options) {
         _options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
@@ -18,7 +21,7 @@ public abstract class DatabaseStringLocalizerFactory : IStringLocalizerFactory {
     public IStringLocalizer Create(Type resourceSource) {
         if (resourceSource is null) throw new ArgumentNullException(nameof(resourceSource));
 
-        var typeInfo = resourceSource.GetTypeInfo();
+        TypeInfo typeInfo = resourceSource.GetTypeInfo();
         if (string.IsNullOrEmpty(typeInfo.FullName)) {
             throw new ArgumentException($"Type must have type name {typeInfo}");
         }

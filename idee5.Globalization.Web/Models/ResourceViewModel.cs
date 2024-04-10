@@ -8,7 +8,7 @@ namespace idee5.Globalization.Web.Models {
         private LanguageViewModel _languageItem;
 
         /// <summary>
-        /// Gets the unique model id. Generated for the use in kendo ui components.
+        /// Gets the unique model id. Generated for the use in grid components.
         /// </summary>
         /// <value>The model id</value>
         public string ModelId {

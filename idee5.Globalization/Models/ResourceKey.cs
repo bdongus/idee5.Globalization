@@ -2,6 +2,9 @@
 
 namespace idee5.Globalization.Models;
 
+/// <summary>
+/// The resource key.
+/// </summary>
 public record ResourceKey {
     /// <summary>
     /// Name of the resource set

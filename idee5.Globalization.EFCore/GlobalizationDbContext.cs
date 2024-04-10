@@ -35,7 +35,6 @@ namespace idee5.Globalization.EFCore {
         /// <remarks>See this github issue: https://github.com/aspnet/EntityFrameworkCore/issues/7533#issuecomment-353669263 </remarks>
         /// <param name="options"></param>
         protected GlobalizationDbContext(DbContextOptions options) : base(options) {
-
         }
         /// <summary>
         /// The <see cref="Resource"/>s in the database.

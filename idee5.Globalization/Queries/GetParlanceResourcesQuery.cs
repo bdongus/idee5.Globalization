@@ -1,10 +1,11 @@
 ﻿using idee5.Common;
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace idee5.Globalization.Queries;
 /// <summary>
-/// Query parameters for retieval of a parlance resource set
+/// Query parameters for retrieval of a parlance resource set
 /// </summary>
 /// <param name="ResourceSet"> Id of the resource set </param>
 /// <param name="LanguageId"> An IETF languageId tag specifying the resource sets languageId </param>

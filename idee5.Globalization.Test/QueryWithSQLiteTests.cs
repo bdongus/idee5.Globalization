@@ -2,6 +2,7 @@
 using idee5.Globalization.Queries;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -108,6 +109,33 @@ namespace idee5.Globalization.Test {
 
             // Assert
             Assert.AreEqual(4, result.Count);
+        }
+
+        [TestMethod]
+        public async Task CanGetTranslations() {
+            // Arrange
+            var qh = new GetResourceKeyTranslationsQueryHandler(resourceUnitOfWork.ResourceRepository);
+
+            // Act
+            var query = new GetResourceKeyTranslationsQuery() { ResourceSet = Constants.CommonTerms, Id = "Maybe"};
+            var result = await qh.HandleAsync(query, CancellationToken.None).ConfigureAwait(false);
+
+            // Assert
+            Assert.AreEqual(4, result.Translations.Count());
+        }
+
+        [TestMethod]
+        public async Task GetsEmptyTranslationsForMissingResourceKey() {
+            // Arrange
+            var qh = new GetResourceKeyTranslationsQueryHandler(resourceUnitOfWork.ResourceRepository);
+
+            // Act
+            var query = new GetResourceKeyTranslationsQuery() { ResourceSet = "Empty", Id = "Maybe"};
+            var result = await qh.HandleAsync(query, CancellationToken.None).ConfigureAwait(false);
+
+            // Assert
+            Assert.AreEqual("Empty", result.ResourceSet);
+            Assert.AreEqual(0, result.Translations.Count());
         }
     }
 }

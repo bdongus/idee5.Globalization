@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using idee5.Common;
 using idee5.Globalization.Repositories;
 
 namespace idee5.Globalization.Queries;
+/// <summary>
+/// The get resource sets by name query handler
+/// </summary>
 public class GetResourceSetsByNameQueryHandler : IQueryHandlerAsync<GetResourceSetsByNameQuery, IList<string>> {
     private readonly IResourceQueryRepository _repository;
 

@@ -20,7 +20,7 @@ namespace idee5.Globalization.Web.Models {
         /// </summary>
         /// <value>The language item</value>
         public LanguageViewModel LanguageItem {
-            get { return _languageItem != null ? _languageItem : Language == null ? null : new LanguageViewModel(Language, new System.Globalization.CultureInfo(Language).NativeName); }
+            get { return _languageItem ?? (Language == null ? null : new LanguageViewModel(Language, new System.Globalization.CultureInfo(Language).NativeName)); }
             set { _languageItem = value; }
         }
 

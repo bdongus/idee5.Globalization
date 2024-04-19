@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace idee5.Globalization.Models;
 /// <summary>
@@ -8,7 +9,7 @@ public record ResourceTranslations : ResourceKey {
     public ResourceTranslations() {
         Translations = [];
     }
-    public ResourceTranslations(string resourceSet, string id, string? industry, string? customer, Translation[] translations) {
+    public ResourceTranslations(string resourceSet, string id, string? industry, string? customer, IList<Translation> translations) {
         ResourceSet = resourceSet;
         Id = id;
         Industry = industry;
@@ -16,12 +17,12 @@ public record ResourceTranslations : ResourceKey {
         Translations = translations;
     }
 
-    public ResourceTranslations(ResourceKey original, Translation[] translations) : base(original) {
+    public ResourceTranslations(ResourceKey original, IList<Translation> translations) : base(original) {
         Translations = translations ?? throw new ArgumentNullException(nameof(translations));
     }
 
     /// <summary>
     /// Translations of the <see cref="ResourceKey">.
     /// </summary>
-    public Translation[] Translations { get; set; }
+    public IList<Translation> Translations { get; set; }
 }

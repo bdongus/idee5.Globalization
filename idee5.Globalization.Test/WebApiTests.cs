@@ -22,6 +22,6 @@ public class WebApiTests {
         // Assert
         Assert.IsNotNull(response);
         Assert.AreEqual("CommonTerms", response.ResourceSet);
-        Assert.AreEqual(3, response.Translations.Length);
+        Assert.AreEqual(3, response.Translations.Count);
     }
 }

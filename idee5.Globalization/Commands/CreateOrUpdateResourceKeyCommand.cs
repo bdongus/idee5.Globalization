@@ -7,6 +7,9 @@ namespace idee5.Globalization.Commands;
 /// The update resource key command
 /// </summary>
 public record CreateOrUpdateResourceKeyCommand : ResourceTranslations {
+    public CreateOrUpdateResourceKeyCommand() {
+    }
+
     public CreateOrUpdateResourceKeyCommand(ResourceKey original, IList<Translation> translations) : base(original, translations) {
     }
 

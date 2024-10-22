@@ -42,7 +42,7 @@ public class GetParlanceResourcesQueryHandler : IQueryHandlerAsync<GetParlanceRe
             throw new ArgumentNullException(nameof(query));
 
         ASpec<Models.Resource> languageSpec = query.LanguageId.HasValue() ? OfLanguage(query.LanguageId) : NeutralLanguage;
-        ASpec<Models.Resource>.And<Models.Resource> parlanceSpec = InResourceSet(query.ResourceSet) & languageSpec & CustomerParlance(query.CustomerId) & IndustryParlance(query.IndustryId);
+        ASpec<Models.Resource> parlanceSpec = InResourceSet(query.ResourceSet) & languageSpec & CustomerParlance(query.CustomerId) & IndustryParlance(query.IndustryId);
 
         // get the resources
         IEnumerable<Models.Resource> reslist = await _repository.GetAsync(parlanceSpec, cancellationToken).ConfigureAwait(false);

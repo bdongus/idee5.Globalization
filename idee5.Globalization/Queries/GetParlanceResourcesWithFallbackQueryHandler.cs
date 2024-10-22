@@ -45,7 +45,7 @@ public class GetParlanceResourcesWithFallbackQueryHandler : IQueryHandlerAsync<G
 
         var resources = new Dictionary<string, object>();
         ASpec<Models.Resource> languageSpec = query.LanguageId.HasValue() ? OfLanguageOrFallback(query.LanguageId) : NeutralLanguage;
-        ASpec<Models.Resource>.And<Models.Resource> parlanceSpec = InResourceSet(query.ResourceSet) & languageSpec & CustomerParlance(query.CustomerId) & IndustryParlance(query.IndustryId);
+        ASpec<Models.Resource> parlanceSpec = InResourceSet(query.ResourceSet) & languageSpec & CustomerParlance(query.CustomerId) & IndustryParlance(query.IndustryId);
 
         // get the resources
         IEnumerable<Models.Resource> r1 = await _repository.GetAsync(parlanceSpec, cancellationToken).ConfigureAwait(false);

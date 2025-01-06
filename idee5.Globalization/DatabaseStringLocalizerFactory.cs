@@ -34,18 +34,24 @@ public abstract class DatabaseStringLocalizerFactory : IStringLocalizerFactory {
         if (baseName is null) throw new ArgumentNullException(nameof(baseName));
         if (location is null) throw new ArgumentNullException(nameof(location));
 
-        var assemblyName = new AssemblyName(location);
-        var assembly = Assembly.Load(assemblyName);
-        var rootNamespace = assembly.GetName().Name;
-
         // remove the location part from the base name, if neccessary
         var prefix = location + ".";
         if (baseName.StartsWith(prefix, StringComparison.Ordinal)) {
             baseName = baseName.Substring(prefix.Length);
         }
+        // if the location is an assembly name, try to load the assembly and get the root namespace
+        try {
+            var assemblyName = new AssemblyName(location);
+            var assembly = Assembly.Load(assemblyName);
+            var rootNamespace = assembly.GetName().Name;
 
-        string resourceSet = rootNamespace + "." + baseName;
-        return GetLocalizer(resourceSet);
+            return GetLocalizer(rootNamespace + "." + baseName);
+        }
+        catch (Exception) {
+            // if there is no assembly use the base name. This is an additional feature and not part of the original implementation
+            // this is meant for imported resx files and not for embedded resources
+            return GetLocalizer(baseName);
+        }
     }
     private IStringLocalizer GetLocalizer(string resourceSet) {
         // Get without Add to prevent unnecessary lambda allocation

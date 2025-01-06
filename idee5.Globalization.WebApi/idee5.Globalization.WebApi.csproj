@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <PackageReference Include="idee5.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -69,6 +69,33 @@ public class LocalizerFactoryTests : UnitTestBase {
     }
 
     [TestMethod]
+    public async Task CanGetStringForCustomResourceSet() {
+        // Arrange
+        resourceUnitOfWork.ResourceRepository.Add(new Resource() {
+            ResourceSet = "CommonTerms",
+            Id = "Value2",
+            Language = "de",
+            Value = "Test",
+            Customer = "",
+            Industry = ""
+        });
+        await resourceUnitOfWork.SaveChangesAsync();
+        var locOpt = new LocalizationParlanceOptions();
+        IOptions<LocalizationParlanceOptions> options = Options.Create(locOpt);
+        var factory = new EFCoreStringLocalizerFactory(options, new ContextFactory(this));
+        var cultureInfo = new System.Globalization.CultureInfo("de-CH");
+        Thread.CurrentThread.CurrentCulture = cultureInfo;
+        Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+        // Act
+        var localizer = factory.Create("CommonTerms", "");
+        var result = localizer["Value2"];
+
+        // Assert
+        Assert.AreEqual("Test", result.Value);
+    }
+
+    [TestMethod]
     public void ReturnsLocalizerFromCache() {
         // Arrange
         Type type = typeof(LocalizerFactoryTests);

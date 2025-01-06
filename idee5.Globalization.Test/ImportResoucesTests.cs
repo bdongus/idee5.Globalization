@@ -76,6 +76,30 @@ public class ImportResoucesTests : WithSQLiteBase {
         Assert.IsNotNull(res.SingleOrDefault(r => r.Id == "NewTextFile")?.Textfile);
     }
     [TestMethod]
+    public async Task CanImportCultureResxFile() {
+        // Arrange
+        var handler = new CreateOrUpdateResourceCommandHandler(resourceUnitOfWork);
+        var recursiveAnnotationsValidator = new RecursiveAnnotationsValidator();
+        var validationReporter = new ConsoleValidationReporter();
+        var inputHandler = new ResxFileInputHandler(new NullLogger<ResxFileInputHandler>());
+        var outputHandler = new DataAnnotationValidationCommandHandlerAsync<CreateOrUpdateResourceCommand>(recursiveAnnotationsValidator, validationReporter, handler);
+
+        var importer = new AsyncDataImporter<ResxFileInputHandlerQuery, CreateOrUpdateResourceCommand, NoCleanupCommand>(inputHandler, outputHandler, new NoCleanupCommandHandler());
+        var query = new ResxFileInputHandlerQuery("ImportTest.de.resx", "ImportTest", null, null, null);
+
+        // This is needed to support the text file encoding in our resx
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        // Act
+        await importer.ExecuteAsync(query, new NoCleanupCommand()).ConfigureAwait(false);
+
+        // Assert
+        List<Resource> res = await resourceUnitOfWork.ResourceRepository.GetAsync(r => r.ResourceSet == "ImportTest").ConfigureAwait(false);
+        Assert.AreEqual(2, res.Count);
+        Resource? resource = res.SingleOrDefault(r => r.Id == "CommentedText");
+        Assert.IsNotNull(resource?.Comment);
+        Assert.AreEqual("de", resource?.Language);
+    }
+    [TestMethod]
     public async Task DoesNotThrowIfResxNotFound() {
         // Arrange
         var handler = new CreateOrUpdateResourceCommandHandler(resourceUnitOfWork);
@@ -124,5 +148,26 @@ public class ImportResoucesTests : WithSQLiteBase {
         // Assert
         int count = await resourceUnitOfWork.ResourceRepository.CountAsync(r => r.ResourceSet == "testset").ConfigureAwait(false);
         Assert.AreEqual(1, count);
+    }
+    [TestMethod]
+    public async Task CanImportAssemblyResources() {
+        // Arrange
+        var handler = new CreateOrUpdateResourceCommandHandler(resourceUnitOfWork);
+        var recursiveAnnotationsValidator = new RecursiveAnnotationsValidator();
+        var validationReporter = new ConsoleValidationReporter();
+        var inputHandler = new ResourceAssemblyInputHandler(new NullLogger<ResourceAssemblyInputHandler>());
+        var outputHandler = new DataAnnotationValidationCommandHandlerAsync<CreateOrUpdateResourceCommand>(recursiveAnnotationsValidator, validationReporter, handler);
+
+        var importer = new AsyncDataImporter<ResourceAssemblyInputHandlerQuery, CreateOrUpdateResourceCommand, NoCleanupCommand>(inputHandler, outputHandler, new NoCleanupCommandHandler());
+        var query = new ResourceAssemblyInputHandlerQuery(".\\de\\idee5.Globalization.Test.resources.dll", null, null, null);
+
+        // Act
+        await importer.ExecuteAsync(query, new NoCleanupCommand()).ConfigureAwait(false);
+
+        // Assert
+        List<Resource> res = await resourceUnitOfWork.ResourceRepository.GetAsync(r => r.ResourceSet == "idee5.Globalization.Test.Properties.Resources").ConfigureAwait(false);
+        Assert.AreEqual(2, res.Count);
+        Assert.IsNull(res.SingleOrDefault(r => r.Id == "CommentedText")?.Comment);
+
     }
 }

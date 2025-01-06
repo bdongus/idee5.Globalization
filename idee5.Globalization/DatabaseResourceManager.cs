@@ -38,8 +38,8 @@ public class DatabaseResourceManager : ResourceManager {
     /// and GetObject) invoke the method <see cref="ResourceManager.InternalGetResourceSet"/>.
     /// </summary>
     /// <param name="culture">The culture.</param>
-    /// <param name="createIfNotExists">The create if not exists.</param>
-    /// <param name="tryParents">The try parents.</param>
+    /// <param name="createIfNotExists">Load the resource set, if it has not been loaded yet or not</param>
+    /// <param name="tryParents">Check the parent <see cref="CultureInfo"/> or not</param>
     protected override ResourceSet? InternalGetResourceSet(CultureInfo culture, bool createIfNotExists, bool tryParents) {
         ResourceSet? rs = null;
         if (culture != null) {
